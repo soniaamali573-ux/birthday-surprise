@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  background: radial-gradient(circle,#ffdde1,#ee9ca7);
+  font-family:'Pacifico', cursive;
+  text-align:center;
+  overflow:hidden;
+}
+
+h1 { font-size:3em; margin-top:40px; }
+button {
+  padding:15px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d6d;
+  color:white;
+  cursor:pointer;
+}
+
+.floating {
+  position:absolute;
+  animation: floatUp 6s linear infinite;
+  font-size:30px;
+}
+
+@keyframes floatUp {
+  from { bottom:-50px; }
+  to { bottom:110%; }
+}
+
+#ignore {
+  position:absolute;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="title">🎉 Happy Birthday 🎉<br>Dyno 💖</h1>
+
+<button onclick="startSurprise()">Click here for surprise</button>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_36f4c49b63.mp3">
+</audio>
+
+<script>
+function startSurprise(){
+  document.getElementById("music").play();
+  document.body.innerHTML += `
+  <h1>💓🎈🎉</h1>
+  <button onclick="secondSurprise()">Want another surprise?</button>
+  <button id="ignore">Ignore</button>
+  `;
+  setInterval(createFloat,300);
+
+  const ig=document.getElementById("ignore");
+  ig.onmouseover=()=>{
+    ig.style.left=Math.random()*80+"%";
+    ig.style.top=Math.random()*80+"%";
+  }
+}
+
+function createFloat(){
+  const el=document.createElement("div");
+  el.className="floating";
+  el.innerText=["💖","🎈","🎉","💓","🫶"][Math.floor(Math.random()*5)];
+  el.style.left=Math.random()*100+"%";
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),6000);
+}
+
+function secondSurprise(){
+  document.body.innerHTML=`
+  <h1>🎂</h1>
+  <p>Tap candle to blow</p>
+  <button onclick="blow()">🕯️🕯️🕯️</button>
+  `;
+  const song=new Audio("https://cdn.pixabay.com/audio/2021/08/04/audio_0c7df0c07c.mp3");
+  song.play();
+}
+
+function blow(){
+  document.body.innerHTML=`
+  <h1>🕊️💌</h1>
+  <p style="padding:20px;font-size:18px;">
+  Happy Birthday Dinosaur💓🎀<br><br>
+  Many Many Happy Returns of the day✨<br><br>
+  May Mahakaal bless uh🔱🎂<br>
+  May uh have a great day and a year ahead 💫<br>
+  Stay Healthy, Stay Same as before 💕<br><br>
+  May our relation be safe from everything and we stay together with each other 💞<br><br>
+  I luv uh soo much 🫶∞<br><br>
+  <b>— from ur spidy 🕷️</b>
+  </p>
+  `;
+}
+</script>
+
+</body>
+</html>
